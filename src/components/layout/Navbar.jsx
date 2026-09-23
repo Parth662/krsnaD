@@ -133,8 +133,8 @@ export default function Navbar() {
 
       {/* Full-Viewport Compact Editorial Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-[#FAFAF8] text-[#1A1A1A] overflow-y-auto p-4 sm:p-6 font-sans animate-in fade-in-50 duration-200">
-          <div className="max-w-xl mx-auto space-y-4">
+        <div className="fixed inset-0 z-50 bg-[#FAFAF8] text-[#1A1A1A] overflow-y-auto p-4 sm:p-6 font-sans animate-in fade-in-50 duration-200 min-h-[100dvh]">
+          <div className="max-w-xl mx-auto space-y-3.5 sm:space-y-4">
             
             {/* Header Bar inside Mobile Menu */}
             <div className="flex items-center justify-between pb-3 border-b border-[#E8E4DF]">
@@ -179,7 +179,7 @@ export default function Navbar() {
                         key={link.path}
                         to={link.path}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`py-1.5 text-sm min-[375px]:text-base sm:text-lg font-serif-heading font-semibold border-b border-[#E8E4DF]/40 transition-colors flex items-center min-h-[40px] ${
+                        className={`py-1 min-[375px]:py-1.5 text-[18px] min-[375px]:text-[19px] sm:text-[20px] font-serif-heading font-semibold border-b border-[#E8E4DF]/40 transition-colors flex items-center min-h-[38px] sm:min-h-[42px] ${
                           active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
                         }`}
                       >
@@ -198,7 +198,7 @@ export default function Navbar() {
                         key={link.path}
                         to={link.path}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`py-1.5 text-sm min-[375px]:text-base sm:text-lg font-serif-heading font-semibold border-b border-[#E8E4DF]/40 transition-colors flex items-center min-h-[40px] ${
+                        className={`py-1 min-[375px]:py-1.5 text-[18px] min-[375px]:text-[19px] sm:text-[20px] font-serif-heading font-semibold border-b border-[#E8E4DF]/40 transition-colors flex items-center min-h-[38px] sm:min-h-[42px] ${
                           active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
                         }`}
                       >
@@ -219,7 +219,7 @@ export default function Navbar() {
                 <Link
                   to="/book"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full bg-[#0F766E] text-white hover:bg-[#0D9488] px-4 py-2.5 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
+                  className="w-full bg-[#0F766E] text-white hover:bg-[#0D9488] px-4 py-2.5 rounded-sm font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
                 >
                   <span>BOOK A TEST</span>
                   <ArrowRight className="w-4 h-4 stroke-[1.75]" />
@@ -229,7 +229,7 @@ export default function Navbar() {
                 <Link
                   to="/reports"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full bg-[#F0FDFA] border border-[#CCFBF1] text-[#0F766E] hover:bg-[#CCFBF1] px-4 py-2.5 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
+                  className="w-full bg-[#F0FDFA] border border-[#CCFBF1] text-[#0F766E] hover:bg-[#CCFBF1] px-4 py-2.5 rounded-sm font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
                 >
                   <span>PATIENT PORTAL</span>
                   <ArrowRight className="w-4 h-4 stroke-[1.75]" />
@@ -239,7 +239,7 @@ export default function Navbar() {
                 <Link
                   to="/patient-care"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full bg-white border border-[#E8E4DF] text-[#1A1A1A] hover:bg-[#F5F3F0] px-4 py-2.5 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
+                  className="w-full bg-white border border-[#E8E4DF] text-[#1A1A1A] hover:bg-[#F5F3F0] px-4 py-2.5 rounded-sm font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
                 >
                   <span>CONTACT / SUPPORT</span>
                   <ArrowRight className="w-4 h-4 stroke-[1.75]" />
@@ -248,8 +248,8 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Bottom Utility Information Strip — Naturally follows after ~32px space */}
-            <div className="pt-6 mt-6 border-t border-[#E8E4DF] flex items-center justify-between text-[10px] sm:text-[11px] font-mono-meta text-[#6B6B6B]">
+            {/* Bottom Utility Information Strip — Grouped naturally with 36px space */}
+            <div className="pt-8 mt-2 border-t border-[#E8E4DF] flex items-center justify-between text-[10px] sm:text-[11px] font-mono-meta text-[#6B6B6B]">
               <span>ISO 15189 / NABL MC-2940</span>
               <a href="tel:18002120000" className="text-[#0F766E] font-bold hover:underline flex items-center gap-1">
                 <PhoneCall className="w-3 h-3 stroke-[1.5]" />

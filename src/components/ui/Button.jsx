@@ -12,7 +12,7 @@ export default function Button({
   onClick,
   ...props
 }) {
-  const baseStyles = 'inline-flex items-center justify-center font-sans font-medium text-sm transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0F766E] disabled:opacity-50 disabled:pointer-events-none cursor-pointer rounded-md group min-h-[44px] touch-manipulation';
+  const baseStyles = 'inline-flex items-center justify-center font-sans font-medium text-sm transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0F766E] disabled:opacity-50 disabled:pointer-events-none cursor-pointer rounded-sm group min-h-[44px] touch-manipulation';
 
   const sizes = {
     sm: 'py-2 px-3.5 text-xs gap-1.5 min-h-[40px] sm:min-h-[44px]',

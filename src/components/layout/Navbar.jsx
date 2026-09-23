@@ -131,15 +131,13 @@ export default function Navbar() {
         </div>
       </Container>
 
-      {/* Full-Viewport Editorial Mobile Menu */}
+      {/* Full-Viewport Compact Editorial Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-[#FAFAF8] text-[#1A1A1A] flex flex-col justify-between p-4 sm:p-6 min-h-[100dvh] overflow-y-auto font-sans animate-in fade-in-50 duration-200">
-          
-          {/* Top Section: Header + Main Nav Grid + Action Area */}
-          <div className="space-y-3 sm:space-y-4">
+        <div className="fixed inset-0 z-50 bg-[#FAFAF8] text-[#1A1A1A] overflow-y-auto p-4 sm:p-6 font-sans animate-in fade-in-50 duration-200">
+          <div className="max-w-xl mx-auto space-y-4">
             
             {/* Header Bar inside Mobile Menu */}
-            <div className="flex items-center justify-between pb-3 border-b border-[#E8E4DF] shrink-0">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E8E4DF]">
               <Link
                 to="/"
                 onClick={() => setMobileMenuOpen(false)}
@@ -164,13 +162,13 @@ export default function Navbar() {
             </div>
 
             {/* Main Navigation Section */}
-            <div className="pt-1">
+            <div>
               <span className="font-mono-meta text-[10px] uppercase tracking-[0.15em] text-[#0F766E] block font-bold mb-1.5">
                 01 — MAIN NAVIGATION
               </span>
 
               {/* 2-Column Compact Navigation Grid */}
-              <div className="grid grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-1">
+              <div className="grid grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-0.5 sm:gap-y-1">
                 
                 {/* Column 1 */}
                 <div className="flex flex-col">
@@ -181,7 +179,7 @@ export default function Navbar() {
                         key={link.path}
                         to={link.path}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`py-1.5 text-sm min-[375px]:text-base sm:text-lg font-serif-heading font-semibold border-b border-[#E8E4DF]/40 transition-colors flex items-center min-h-[42px] ${
+                        className={`py-1.5 text-sm min-[375px]:text-base sm:text-lg font-serif-heading font-semibold border-b border-[#E8E4DF]/40 transition-colors flex items-center min-h-[40px] ${
                           active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
                         }`}
                       >
@@ -200,7 +198,7 @@ export default function Navbar() {
                         key={link.path}
                         to={link.path}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`py-1.5 text-sm min-[375px]:text-base sm:text-lg font-serif-heading font-semibold border-b border-[#E8E4DF]/40 transition-colors flex items-center min-h-[42px] ${
+                        className={`py-1.5 text-sm min-[375px]:text-base sm:text-lg font-serif-heading font-semibold border-b border-[#E8E4DF]/40 transition-colors flex items-center min-h-[40px] ${
                           active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
                         }`}
                       >
@@ -213,17 +211,15 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Editorial Thin Divider */}
+            {/* Editorial Thin Divider & 3 Full-Width Action Rows */}
             <div className="border-t border-[#E8E4DF] pt-3">
-              
-              {/* Action Area — Three Full-Width Action Rows */}
               <div className="space-y-2">
                 
                 {/* Row 1: Primary Action — BOOK A TEST */}
                 <Link
                   to="/book"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full bg-[#0F766E] text-white hover:bg-[#0D9488] px-4 py-3 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
+                  className="w-full bg-[#0F766E] text-white hover:bg-[#0D9488] px-4 py-2.5 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
                 >
                   <span>BOOK A TEST</span>
                   <ArrowRight className="w-4 h-4 stroke-[1.75]" />
@@ -233,7 +229,7 @@ export default function Navbar() {
                 <Link
                   to="/reports"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full bg-[#F0FDFA] border border-[#CCFBF1] text-[#0F766E] hover:bg-[#CCFBF1] px-4 py-3 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
+                  className="w-full bg-[#F0FDFA] border border-[#CCFBF1] text-[#0F766E] hover:bg-[#CCFBF1] px-4 py-2.5 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
                 >
                   <span>PATIENT PORTAL</span>
                   <ArrowRight className="w-4 h-4 stroke-[1.75]" />
@@ -243,7 +239,7 @@ export default function Navbar() {
                 <Link
                   to="/patient-care"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full bg-white border border-[#E8E4DF] text-[#1A1A1A] hover:bg-[#F5F3F0] px-4 py-3 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
+                  className="w-full bg-white border border-[#E8E4DF] text-[#1A1A1A] hover:bg-[#F5F3F0] px-4 py-2.5 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
                 >
                   <span>CONTACT / SUPPORT</span>
                   <ArrowRight className="w-4 h-4 stroke-[1.75]" />
@@ -252,17 +248,16 @@ export default function Navbar() {
               </div>
             </div>
 
-          </div>
+            {/* Bottom Utility Information Strip — Naturally follows after ~32px space */}
+            <div className="pt-6 mt-6 border-t border-[#E8E4DF] flex items-center justify-between text-[10px] sm:text-[11px] font-mono-meta text-[#6B6B6B]">
+              <span>ISO 15189 / NABL MC-2940</span>
+              <a href="tel:18002120000" className="text-[#0F766E] font-bold hover:underline flex items-center gap-1">
+                <PhoneCall className="w-3 h-3 stroke-[1.5]" />
+                <span>1800-212-0000</span>
+              </a>
+            </div>
 
-          {/* Bottom Utility Information Strip */}
-          <div className="pt-3 border-t border-[#E8E4DF] flex items-center justify-between text-[10px] sm:text-[11px] font-mono-meta text-[#6B6B6B] shrink-0">
-            <span>ISO 15189 / NABL MC-2940</span>
-            <a href="tel:18002120000" className="text-[#0F766E] font-bold hover:underline flex items-center gap-1">
-              <PhoneCall className="w-3 h-3 stroke-[1.5]" />
-              <span>1800-212-0000</span>
-            </a>
           </div>
-
         </div>
       )}
     </header>

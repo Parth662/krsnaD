@@ -19,7 +19,17 @@ export default function Navbar() {
     };
   }, [mobileMenuOpen]);
 
-  const mainNavLinks = [
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    if (mobileMenuOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
+  const desktopNavLinks = [
     { label: 'Tests & Diagnostics', path: '/tests' },
     { label: 'Home Collection', path: '/home-collection' },
     { label: 'Centres Network', path: '/centres' },
@@ -27,11 +37,20 @@ export default function Navbar() {
     { label: 'About Krsnaa', path: '/about' },
   ];
 
-  const secondaryNavLinks = [
+  // Mobile 2-Column Primary Navigation Links
+  const mobileCol1 = [
+    { label: 'Home', path: '/' },
+    { label: 'Home Collection', path: '/home-collection' },
+    { label: 'Patient Care', path: '/patient-care' },
+    { label: 'About', path: '/about' },
     { label: 'How It Works', path: '/how-it-works' },
-    { label: 'Digital System', path: '/digital' },
-    { label: 'Patient Portal & Reports', path: '/reports' },
-    { label: 'Book a Diagnostic Test', path: '/book' },
+  ];
+
+  const mobileCol2 = [
+    { label: 'Tests & Diagnostics', path: '/tests' },
+    { label: 'Centres', path: '/centres' },
+    { label: 'Reports', path: '/reports' },
+    { label: 'Digital Experience', path: '/digital' },
   ];
 
   const isActive = (path) => {
@@ -63,7 +82,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
-            {mainNavLinks.map((link) => {
+            {desktopNavLinks.map((link) => {
               const active = isActive(link.path);
               return (
                 <Link
@@ -112,92 +131,114 @@ export default function Navbar() {
         </div>
       </Container>
 
-      {/* Editorial Mobile Navigation Drawer */}
+      {/* Full-Viewport Editorial Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-[64px] sm:top-[80px] bottom-0 bg-[#FAFAF8] border-b border-[#E8E4DF] z-40 overflow-y-auto px-6 py-8 space-y-8 animate-in slide-in-from-top-2 duration-200">
+        <div className="fixed inset-0 z-50 bg-[#FAFAF8] text-[#1A1A1A] flex flex-col justify-between p-5 sm:p-6 min-h-[100dvh] overflow-y-auto font-sans animate-in fade-in-50 duration-200">
           
-          {/* Main Navigation Section */}
-          <nav className="flex flex-col space-y-2">
-            <span className="font-mono-meta text-[10px] uppercase tracking-[0.2em] text-[#0F766E] block mb-2 font-bold">
-              01 — MAIN NAVIGATION
-            </span>
-
+          {/* Header Bar inside Mobile Menu */}
+          <div className="flex items-center justify-between pb-4 border-b border-[#E8E4DF] shrink-0">
             <Link
               to="/"
               onClick={() => setMobileMenuOpen(false)}
-              className={`text-xl font-serif-heading min-h-[48px] flex items-center justify-between border-b border-[#E8E4DF] transition-colors ${
-                isActive('/') ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
-              }`}
+              className="flex flex-col justify-center min-h-[44px]"
             >
-              <span>Home Page</span>
-              <ArrowRight className="w-4 h-4 text-[#6B6B6B]" />
+              <span className="font-serif-heading text-2xl font-bold tracking-tight text-[#1A1A1A] leading-none">
+                Krsnaa
+              </span>
+              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-[#0F766E] mt-0.5">
+                DIAGNOSTICS
+              </span>
             </Link>
 
-            {mainNavLinks.map((link) => {
-              const active = isActive(link.path);
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-xl font-serif-heading min-h-[48px] flex items-center justify-between border-b border-[#E8E4DF] transition-colors ${
-                    active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
-                  }`}
-                >
-                  <span>{link.label}</span>
-                  <ArrowRight className="w-4 h-4 text-[#6B6B6B]" />
-                </Link>
-              );
-            })}
-          </nav>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(false)}
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[#1A1A1A] hover:text-[#0F766E] p-2 focus:outline-none"
+              aria-label="Close Navigation Menu"
+            >
+              <X className="w-7 h-7 stroke-[1.75]" />
+            </button>
+          </div>
 
-          {/* Secondary Services Section */}
-          <nav className="flex flex-col space-y-1">
-            <span className="font-mono-meta text-[10px] uppercase tracking-[0.2em] text-[#0F766E] block mb-2 font-bold">
-              02 — PATIENT SERVICES & DIGITAL PORTAL
+          {/* Main Navigation Body — Two Column Editorial Layout */}
+          <div className="my-auto py-4 space-y-4 sm:space-y-6">
+            
+            <span className="font-mono-meta text-[11px] uppercase tracking-[0.2em] text-[#0F766E] block font-bold">
+              01 — MAIN NAVIGATION
             </span>
-            {secondaryNavLinks.map((link) => {
-              const active = isActive(link.path);
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-sm font-sans min-h-[44px] flex items-center justify-between border-b border-[#E8E4DF]/60 transition-colors ${
-                    active ? 'text-[#0F766E] font-semibold' : 'text-[#6B6B6B] hover:text-[#1A1A1A]'
-                  }`}
-                >
-                  <span>{link.label}</span>
-                  <span className="text-xs text-[#0F766E]">→</span>
-                </Link>
-              );
-            })}
-          </nav>
 
-          {/* Action CTAs in Mobile Drawer */}
-          <div className="pt-2 space-y-3 pb-12">
-            <Link
-              to="/reports"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center text-xs font-sans font-semibold text-[#0F766E] bg-[#F0FDFA] border border-[#CCFBF1] py-3.5 rounded-md block min-h-[48px] flex items-center justify-center gap-2"
-            >
-              <FileText className="w-4 h-4" />
-              <span>Access Patient Portal (Download Reports)</span>
-            </Link>
+            {/* 2-Column Responsive Grid */}
+            <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-1 sm:gap-y-2">
+              
+              {/* Column 1 */}
+              <div className="flex flex-col">
+                {mobileCol1.map((link) => {
+                  const active = isActive(link.path);
+                  return (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`py-2 text-base min-[375px]:text-lg sm:text-xl font-serif-heading font-semibold border-b border-[#E8E4DF]/60 transition-colors flex items-center justify-between min-h-[44px] ${
+                        active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
+                      }`}
+                    >
+                      <span className="truncate">{link.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
 
-            <Link
-              to="/book"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block"
-            >
-              <Button variant="primary" size="lg" className="w-full justify-center">
-                BOOK A DIAGNOSTIC TEST NOW
-              </Button>
-            </Link>
+              {/* Column 2 */}
+              <div className="flex flex-col">
+                {mobileCol2.map((link) => {
+                  const active = isActive(link.path);
+                  return (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`py-2 text-base min-[375px]:text-lg sm:text-xl font-serif-heading font-semibold border-b border-[#E8E4DF]/60 transition-colors flex items-center justify-between min-h-[44px] ${
+                        active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
+                      }`}
+                    >
+                      <span className="truncate">{link.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
 
-            <div className="pt-4 text-center font-mono-meta text-[10px] text-[#6B6B6B]">
-              📞 24/7 STAT Helpline: <a href="tel:18002120000" className="text-[#0F766E] font-bold underline">1800-212-0000</a>
             </div>
+
+            {/* Editorial Thin Divider */}
+            <div className="border-t border-[#E8E4DF] pt-4 mt-4">
+              <div className="flex flex-col space-y-2">
+                <Link
+                  to="/reports"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-2.5 text-sm sm:text-base font-sans font-semibold text-[#0F766E] border-b border-[#E8E4DF]/40 hover:underline min-h-[44px]"
+                >
+                  <span>Patient Portal (Download Reports)</span>
+                  <ArrowRight className="w-4 h-4 stroke-[1.75]" />
+                </Link>
+
+                <Link
+                  to="/book"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-2.5 text-sm sm:text-base font-sans font-semibold text-[#0F766E] border-b border-[#E8E4DF]/40 hover:underline min-h-[44px]"
+                >
+                  <span>Book a Diagnostic Test</span>
+                  <ArrowRight className="w-4 h-4 stroke-[1.75]" />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Footer Info inside Menu */}
+          <div className="pt-4 border-t border-[#E8E4DF] flex items-center justify-between text-[11px] font-mono-meta text-[#6B6B6B] shrink-0">
+            <span>ISO 15189 / NABL MC-2940</span>
+            <span>📞 <a href="tel:18002120000" className="text-[#0F766E] font-bold">1800-212-0000</a></span>
           </div>
 
         </div>

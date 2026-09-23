@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
-import { Menu, X, FileText, CalendarCheck, ArrowRight } from 'lucide-react';
+import { Menu, X, FileText, CalendarCheck, ArrowRight, PhoneCall } from 'lucide-react';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -120,7 +120,7 @@ export default function Navbar() {
           {/* Mobile Menu Hamburger Toggle */}
           <button
             type="button"
-            className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center p-2 text-[#1A1A1A] hover:text-[#0F766E] focus:outline-none"
+            className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center p-2 text-[#1A1A1A] hover:text-[#0F766E] focus:outline-none cursor-pointer"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Navigation Menu"
             aria-expanded={mobileMenuOpen}
@@ -133,112 +133,134 @@ export default function Navbar() {
 
       {/* Full-Viewport Editorial Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-[#FAFAF8] text-[#1A1A1A] flex flex-col justify-between p-5 sm:p-6 min-h-[100dvh] overflow-y-auto font-sans animate-in fade-in-50 duration-200">
+        <div className="fixed inset-0 z-50 bg-[#FAFAF8] text-[#1A1A1A] flex flex-col justify-between p-4 sm:p-6 min-h-[100dvh] overflow-y-auto font-sans animate-in fade-in-50 duration-200">
           
-          {/* Header Bar inside Mobile Menu */}
-          <div className="flex items-center justify-between pb-4 border-b border-[#E8E4DF] shrink-0">
-            <Link
-              to="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex flex-col justify-center min-h-[44px]"
-            >
-              <span className="font-serif-heading text-2xl font-bold tracking-tight text-[#1A1A1A] leading-none">
-                Krsnaa
-              </span>
-              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-[#0F766E] mt-0.5">
-                DIAGNOSTICS
-              </span>
-            </Link>
-
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(false)}
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[#1A1A1A] hover:text-[#0F766E] p-2 focus:outline-none"
-              aria-label="Close Navigation Menu"
-            >
-              <X className="w-7 h-7 stroke-[1.75]" />
-            </button>
-          </div>
-
-          {/* Main Navigation Body — Two Column Editorial Layout */}
-          <div className="my-auto py-4 space-y-4 sm:space-y-6">
+          {/* Top Section: Header + Main Nav Grid + Action Area */}
+          <div className="space-y-3 sm:space-y-4">
             
-            <span className="font-mono-meta text-[11px] uppercase tracking-[0.2em] text-[#0F766E] block font-bold">
-              01 — MAIN NAVIGATION
-            </span>
+            {/* Header Bar inside Mobile Menu */}
+            <div className="flex items-center justify-between pb-3 border-b border-[#E8E4DF] shrink-0">
+              <Link
+                to="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex flex-col justify-center min-h-[44px]"
+              >
+                <span className="font-serif-heading text-xl sm:text-2xl font-bold tracking-tight text-[#1A1A1A] leading-none">
+                  Krsnaa
+                </span>
+                <span className="font-sans text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0F766E] mt-0.5">
+                  DIAGNOSTICS
+                </span>
+              </Link>
 
-            {/* 2-Column Responsive Grid */}
-            <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-1 sm:gap-y-2">
-              
-              {/* Column 1 */}
-              <div className="flex flex-col">
-                {mobileCol1.map((link) => {
-                  const active = isActive(link.path);
-                  return (
-                    <Link
-                      key={link.path}
-                      to={link.path}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`py-2 text-base min-[375px]:text-lg sm:text-xl font-serif-heading font-semibold border-b border-[#E8E4DF]/60 transition-colors flex items-center justify-between min-h-[44px] ${
-                        active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
-                      }`}
-                    >
-                      <span className="truncate">{link.label}</span>
-                    </Link>
-                  );
-                })}
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[#1A1A1A] hover:text-[#0F766E] p-2 focus:outline-none cursor-pointer"
+                aria-label="Close Navigation Menu"
+              >
+                <X className="w-6 h-6 stroke-[1.75]" />
+              </button>
+            </div>
+
+            {/* Main Navigation Section */}
+            <div className="pt-1">
+              <span className="font-mono-meta text-[10px] uppercase tracking-[0.15em] text-[#0F766E] block font-bold mb-1.5">
+                01 — MAIN NAVIGATION
+              </span>
+
+              {/* 2-Column Compact Navigation Grid */}
+              <div className="grid grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-1">
+                
+                {/* Column 1 */}
+                <div className="flex flex-col">
+                  {mobileCol1.map((link) => {
+                    const active = isActive(link.path);
+                    return (
+                      <Link
+                        key={link.path}
+                        to={link.path}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`py-1.5 text-sm min-[375px]:text-base sm:text-lg font-serif-heading font-semibold border-b border-[#E8E4DF]/40 transition-colors flex items-center min-h-[42px] ${
+                          active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
+                        }`}
+                      >
+                        <span className="truncate">{link.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+
+                {/* Column 2 */}
+                <div className="flex flex-col">
+                  {mobileCol2.map((link) => {
+                    const active = isActive(link.path);
+                    return (
+                      <Link
+                        key={link.path}
+                        to={link.path}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`py-1.5 text-sm min-[375px]:text-base sm:text-lg font-serif-heading font-semibold border-b border-[#E8E4DF]/40 transition-colors flex items-center min-h-[42px] ${
+                          active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
+                        }`}
+                      >
+                        <span className="truncate">{link.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+
               </div>
-
-              {/* Column 2 */}
-              <div className="flex flex-col">
-                {mobileCol2.map((link) => {
-                  const active = isActive(link.path);
-                  return (
-                    <Link
-                      key={link.path}
-                      to={link.path}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`py-2 text-base min-[375px]:text-lg sm:text-xl font-serif-heading font-semibold border-b border-[#E8E4DF]/60 transition-colors flex items-center justify-between min-h-[44px] ${
-                        active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
-                      }`}
-                    >
-                      <span className="truncate">{link.label}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-
             </div>
 
             {/* Editorial Thin Divider */}
-            <div className="border-t border-[#E8E4DF] pt-4 mt-4">
-              <div className="flex flex-col space-y-2">
-                <Link
-                  to="/reports"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between py-2.5 text-sm sm:text-base font-sans font-semibold text-[#0F766E] border-b border-[#E8E4DF]/40 hover:underline min-h-[44px]"
-                >
-                  <span>Patient Portal (Download Reports)</span>
-                  <ArrowRight className="w-4 h-4 stroke-[1.75]" />
-                </Link>
-
+            <div className="border-t border-[#E8E4DF] pt-3">
+              
+              {/* Action Area — Three Full-Width Action Rows */}
+              <div className="space-y-2">
+                
+                {/* Row 1: Primary Action — BOOK A TEST */}
                 <Link
                   to="/book"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between py-2.5 text-sm sm:text-base font-sans font-semibold text-[#0F766E] border-b border-[#E8E4DF]/40 hover:underline min-h-[44px]"
+                  className="w-full bg-[#0F766E] text-white hover:bg-[#0D9488] px-4 py-3 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
                 >
-                  <span>Book a Diagnostic Test</span>
+                  <span>BOOK A TEST</span>
                   <ArrowRight className="w-4 h-4 stroke-[1.75]" />
                 </Link>
+
+                {/* Row 2: Patient Portal */}
+                <Link
+                  to="/reports"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full bg-[#F0FDFA] border border-[#CCFBF1] text-[#0F766E] hover:bg-[#CCFBF1] px-4 py-3 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
+                >
+                  <span>PATIENT PORTAL</span>
+                  <ArrowRight className="w-4 h-4 stroke-[1.75]" />
+                </Link>
+
+                {/* Row 3: Contact / Support */}
+                <Link
+                  to="/patient-care"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full bg-white border border-[#E8E4DF] text-[#1A1A1A] hover:bg-[#F5F3F0] px-4 py-3 rounded-md font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-between transition-colors min-h-[44px]"
+                >
+                  <span>CONTACT / SUPPORT</span>
+                  <ArrowRight className="w-4 h-4 stroke-[1.75]" />
+                </Link>
+
               </div>
             </div>
 
           </div>
 
-          {/* Bottom Footer Info inside Menu */}
-          <div className="pt-4 border-t border-[#E8E4DF] flex items-center justify-between text-[11px] font-mono-meta text-[#6B6B6B] shrink-0">
+          {/* Bottom Utility Information Strip */}
+          <div className="pt-3 border-t border-[#E8E4DF] flex items-center justify-between text-[10px] sm:text-[11px] font-mono-meta text-[#6B6B6B] shrink-0">
             <span>ISO 15189 / NABL MC-2940</span>
-            <span>📞 <a href="tel:18002120000" className="text-[#0F766E] font-bold">1800-212-0000</a></span>
+            <a href="tel:18002120000" className="text-[#0F766E] font-bold hover:underline flex items-center gap-1">
+              <PhoneCall className="w-3 h-3 stroke-[1.5]" />
+              <span>1800-212-0000</span>
+            </a>
           </div>
 
         </div>

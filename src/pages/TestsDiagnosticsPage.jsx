@@ -5,7 +5,7 @@ import Footer from '../components/layout/Footer';
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
-import { Search, Filter, CheckCircle2, Clock, ShieldCheck, ArrowRight, Activity, CalendarCheck } from 'lucide-react';
+import { Search, Clock, Activity, CalendarCheck } from 'lucide-react';
 
 export default function TestsDiagnosticsPage() {
   const navigate = useNavigate();
@@ -98,44 +98,17 @@ export default function TestsDiagnosticsPage() {
       sampleType: 'Blood Serum',
       tat: 'Sub-6 Hours TAT',
       nabl: true,
-      popular: true,
-    },
-    {
-      id: 'TST-07',
-      title: 'Renal & Kidney Function Test (KFT)',
-      category: 'DIABETES',
-      categoryLabel: 'Renal Health',
-      parametersCount: 8,
-      desc: 'Assessment of Serum Creatinine, Blood Urea Nitrogen (BUN), Uric Acid, Serum Electrolytes (Sodium, Potassium, Chloride), and eGFR.',
-      fasting: 'No Special Preparation',
-      sampleType: 'Blood & Urine',
-      tat: 'Sub-6 Hours TAT',
-      nabl: true,
-      popular: false,
-    },
-    {
-      id: 'TST-08',
-      title: 'Complete Blood Count (CBC) with ESR',
-      category: 'PATHOLOGY',
-      categoryLabel: 'Pathology Basic',
-      parametersCount: 24,
-      desc: 'Automated 5-Part differential analyzer check for Hemoglobin, RBC count, WBC differential, Platelet count, and Erythrocyte Sedimentation Rate.',
-      fasting: 'No Fasting Required',
-      sampleType: 'EDTA Blood',
-      tat: 'Sub-2 Hours STAT TAT',
-      nabl: true,
       popular: false,
     },
   ];
 
   const filteredTests = testsList.filter((test) => {
-    const matchesCat = selectedCategory === 'ALL' || test.category === selectedCategory;
-    const matchesQuery =
+    const matchesCategory = selectedCategory === 'ALL' || test.category === selectedCategory;
+    const matchesSearch =
       !searchQuery ||
       test.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      test.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      test.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCat && matchesQuery;
+      test.desc.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
   });
 
   const handleBookTest = (testTitle) => {
@@ -160,20 +133,20 @@ export default function TestsDiagnosticsPage() {
             { value: '1,800+', label: 'Collection Centers' },
           ]}
         >
-          <Link to="/book">
-            <Button variant="primary" size="lg" icon={CalendarCheck}>
+          <Link to="/book" className="block sm:inline-block">
+            <Button variant="primary" size="lg" icon={CalendarCheck} className="w-full sm:w-auto justify-center">
               BOOK ANY TEST ONLINE
             </Button>
           </Link>
-          <Link to="/home-collection">
-            <Button variant="secondary" size="lg">
+          <Link to="/home-collection" className="block sm:inline-block">
+            <Button variant="secondary" size="lg" className="w-full sm:w-auto justify-center">
               LEARN HOME COLLECTION
             </Button>
           </Link>
         </PageHero>
 
         {/* Search & Category Filter Section */}
-        <section className="py-12 bg-[#FAFAF8] border-b border-[#E8E4DF]">
+        <section className="py-10 sm:py-16 bg-[#FAFAF8] border-b border-[#E8E4DF]">
           <Container>
             
             {/* Search Input Bar & Category Tabs */}
@@ -185,7 +158,7 @@ export default function TestsDiagnosticsPage() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search test by name (e.g. Lipid, MRI, HbA1c, Thyroid, Kidney)..."
-                    className="w-full bg-white border border-[#E8E4DF] text-[#1A1A1A] text-sm font-sans px-4 py-3 pl-11 focus:outline-none focus:border-[#0F766E] rounded-md shadow-xs"
+                    className="w-full bg-white border border-[#E8E4DF] text-[#1A1A1A] text-sm font-sans px-4 py-3 pl-11 focus:outline-none focus:border-[#0F766E] rounded-md shadow-xs min-h-[44px]"
                   />
                   <Search className="w-5 h-5 text-[#6B6B6B] absolute left-3.5 top-3.5 stroke-[1.75]" />
                 </div>
@@ -196,13 +169,13 @@ export default function TestsDiagnosticsPage() {
                 </div>
               </div>
 
-              {/* Category Pills */}
-              <div className="flex flex-wrap gap-2">
+              {/* Category Pills — Horizontally Scrollable on Mobile */}
+              <div className="flex overflow-x-auto no-scrollbar gap-2 pb-1">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`px-4 py-2 text-xs font-sans rounded-md border transition-all ${
+                    className={`px-4 py-2 text-xs font-sans rounded-md border transition-all shrink-0 min-h-[40px] ${
                       selectedCategory === cat.id
                         ? 'bg-[#0F766E] text-white border-[#0F766E] font-medium shadow-xs'
                         : 'bg-white text-[#6B6B6B] border-[#E8E4DF] hover:bg-[#F5F3F0] hover:text-[#1A1A1A]'
@@ -219,10 +192,10 @@ export default function TestsDiagnosticsPage() {
               {filteredTests.map((test) => (
                 <div
                   key={test.id}
-                  className="bg-white border border-[#E8E4DF] p-6 sm:p-7 rounded-md shadow-xs hover:border-[#CBD5E1] transition-all flex flex-col justify-between space-y-5"
+                  className="bg-white border border-[#E8E4DF] p-5 sm:p-7 rounded-md shadow-xs hover:border-[#CBD5E1] transition-all flex flex-col justify-between space-y-5"
                 >
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
                       <span className="font-mono-meta text-[11px] text-[#0F766E] font-bold bg-[#F0FDFA] px-2.5 py-0.5 border border-[#CCFBF1] rounded-xs">
                         {test.categoryLabel}
                       </span>
@@ -233,7 +206,7 @@ export default function TestsDiagnosticsPage() {
                       )}
                     </div>
 
-                    <h3 className="font-serif-heading font-bold text-xl text-[#1A1A1A]">
+                    <h3 className="font-serif-heading font-bold text-lg sm:text-xl text-[#1A1A1A]">
                       {test.title}
                     </h3>
 
@@ -241,7 +214,7 @@ export default function TestsDiagnosticsPage() {
                       {test.desc}
                     </p>
 
-                    <div className="pt-2 grid grid-cols-2 gap-2 text-xs font-sans text-[#6B6B6B] border-t border-[#E8E4DF]">
+                    <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans text-[#6B6B6B] border-t border-[#E8E4DF]">
                       <div>
                         <span className="text-[10px] uppercase font-mono-meta text-[#6B6B6B] block">Sample / Method</span>
                         <span className="text-[#1A1A1A] font-medium">{test.sampleType}</span>
@@ -253,7 +226,7 @@ export default function TestsDiagnosticsPage() {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-[#E8E4DF] flex items-center justify-between gap-3">
+                  <div className="pt-4 border-t border-[#E8E4DF] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                     <div className="flex items-center gap-2 font-mono-meta text-xs text-[#0F766E]">
                       <Clock className="w-3.5 h-3.5 stroke-[1.75]" />
                       <span className="font-semibold">{test.tat}</span>
@@ -263,6 +236,7 @@ export default function TestsDiagnosticsPage() {
                       variant="primary"
                       size="sm"
                       onClick={() => handleBookTest(test.title)}
+                      className="w-full sm:w-auto justify-center"
                     >
                       Book This Test →
                     </Button>
@@ -275,16 +249,16 @@ export default function TestsDiagnosticsPage() {
         </section>
 
         {/* Quality Assurance Footer Banner */}
-        <section className="py-16 bg-[#F5F3F0] border-b border-[#E8E4DF]">
+        <section className="py-12 sm:py-16 bg-[#F5F3F0] border-b border-[#E8E4DF]">
           <Container>
             <div className="max-w-3xl space-y-4">
               <span className="font-mono-meta text-xs text-[#0F766E] uppercase font-semibold block">
                 NABL ISO 15189 QUALITY GUARANTEE
               </span>
-              <h2 className="font-serif-heading text-2xl sm:text-3xl font-semibold text-[#1A1A1A]">
+              <h2 className="font-serif-heading text-xl sm:text-3xl font-semibold text-[#1A1A1A]">
                 Every sample processed under statutory clinical guidelines.
               </h2>
-              <p className="text-[#6B6B6B] text-sm leading-relaxed font-sans">
+              <p className="text-[#6B6B6B] text-xs sm:text-sm leading-relaxed font-sans">
                 Krsnaa Diagnostics enforces cold-chain specimen transportation, barcode sample tracking, dual pathologist review, and automated analyzer calibration across all reference hubs.
               </p>
             </div>

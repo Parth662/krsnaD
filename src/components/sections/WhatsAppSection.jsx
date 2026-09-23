@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
-import { MessageSquare, CheckCheck, FileText, ArrowRight } from 'lucide-react';
+import { MessageSquare, CheckCheck, FileText } from 'lucide-react';
 
-export default function WhatsAppSection({ onExploreClick }) {
+export default function WhatsAppSection() {
   const messages = [
     {
       time: '08:15 AM',
@@ -33,7 +34,7 @@ export default function WhatsAppSection({ onExploreClick }) {
   ];
 
   return (
-    <section id="track" className="py-20 sm:py-24 bg-[#FAFAF8] border-b border-[#E8E4DF]">
+    <section id="track" className="py-14 sm:py-20 lg:py-24 bg-[#FAFAF8] border-b border-[#E8E4DF]">
       <Container>
         
         {/* Eyebrow */}
@@ -41,15 +42,15 @@ export default function WhatsAppSection({ onExploreClick }) {
           AUTOMATED UPDATES
         </span>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-start">
           
           {/* Left Column — Text (~6 cols) */}
-          <div className="lg:col-span-6 space-y-6">
-            <h2 className="font-serif-heading text-4xl sm:text-5xl font-semibold text-[#1A1A1A] tracking-tight leading-[1.12]">
+          <div className="lg:col-span-6 space-y-5 sm:space-y-6">
+            <h2 className="font-serif-heading text-3xl sm:text-5xl font-semibold text-[#1A1A1A] tracking-tight leading-[1.12]">
               Real-time updates straight to your mobile phone.
             </h2>
 
-            <p className="text-[#6B6B6B] text-base sm:text-lg font-sans leading-relaxed">
+            <p className="text-[#6B6B6B] text-sm sm:text-lg font-sans leading-relaxed">
               Stay informed at every diagnostic milestone without dialing call centers. Krsnaa sends automated, encrypted notifications straight to your WhatsApp and SMS.
             </p>
 
@@ -70,18 +71,20 @@ export default function WhatsAppSection({ onExploreClick }) {
             </div>
 
             <div className="pt-2">
-              <Button
-                variant="primary"
-                size="md"
-                onClick={onExploreClick}
-              >
-                Learn About Patient Care
-              </Button>
+              <Link to="/patient-care" className="block sm:inline-block">
+                <Button
+                  variant="primary"
+                  size="md"
+                  className="w-full sm:w-auto justify-center"
+                >
+                  Learn About Patient Care
+                </Button>
+              </Link>
             </div>
           </div>
 
           {/* Right Column — Minimal Typographic Message Log (~6 cols) */}
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-6 w-full max-w-full">
             <div className="bg-white border border-[#E8E4DF] rounded-md shadow-xs overflow-hidden">
               
               <div className="p-4 bg-[#F5F3F0] border-b border-[#E8E4DF] flex items-center justify-between text-xs font-sans text-[#6B6B6B]">
@@ -94,13 +97,13 @@ export default function WhatsAppSection({ onExploreClick }) {
                 </span>
               </div>
 
-              <div className="p-5 space-y-3 font-sans text-xs sm:text-sm">
+              <div className="p-4 sm:p-5 space-y-3 font-sans text-xs sm:text-sm">
                 {messages.map((msg, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#FAFAF8] border border-[#E8E4DF] p-4 rounded-md space-y-1.5"
+                    className="bg-[#FAFAF8] border border-[#E8E4DF] p-3.5 sm:p-4 rounded-md space-y-1.5"
                   >
-                    <div className="flex items-center justify-between font-mono-meta text-[11px] text-[#6B6B6B] border-b border-[#E8E4DF] pb-1.5">
+                    <div className="flex items-center justify-between font-mono-meta text-[11px] text-[#6B6B6B] border-b border-[#E8E4DF] pb-1.5 flex-wrap gap-1">
                       <span className="text-[#0F766E] font-semibold">{msg.type}</span>
                       <div className="flex items-center gap-1.5">
                         <span>{msg.time}</span>
@@ -113,12 +116,12 @@ export default function WhatsAppSection({ onExploreClick }) {
                     </p>
 
                     {msg.linkText && (
-                      <div className="mt-2 p-2 bg-white border border-[#E8E4DF] rounded-xs flex items-center justify-between text-xs font-mono-meta text-[#0F766E]">
-                        <div className="flex items-center gap-2">
-                          <FileText className="w-4 h-4 text-[#0F766E] stroke-[1.75]" />
-                          <span>{msg.linkText}</span>
+                      <div className="mt-2 p-2 bg-white border border-[#E8E4DF] rounded-xs flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-mono-meta text-[#0F766E] gap-1">
+                        <div className="flex items-center gap-2 truncate">
+                          <FileText className="w-4 h-4 text-[#0F766E] stroke-[1.75] shrink-0" />
+                          <span className="truncate">{msg.linkText}</span>
                         </div>
-                        <span className="font-sans font-medium text-xs text-[#0F766E]">Download PDF</span>
+                        <span className="font-sans font-medium text-xs text-[#0F766E] underline">Download PDF</span>
                       </div>
                     )}
                   </div>
@@ -137,4 +140,3 @@ export default function WhatsAppSection({ onExploreClick }) {
     </section>
   );
 }
-

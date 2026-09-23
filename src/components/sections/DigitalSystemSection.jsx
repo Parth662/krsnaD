@@ -1,8 +1,7 @@
 import React from 'react';
 import Container from '../ui/Container';
-import { Database, Network, ShieldCheck, Activity } from 'lucide-react';
 
-export default function DigitalSystemSection({ onBookClick }) {
+export default function DigitalSystemSection() {
   const subsystems = [
     {
       code: 'SYS-01',
@@ -27,7 +26,7 @@ export default function DigitalSystemSection({ onBookClick }) {
   ];
 
   return (
-    <section id="digital" className="py-20 sm:py-24 bg-[#FAFAF8] border-b border-[#E8E4DF]">
+    <section id="digital" className="py-14 sm:py-20 lg:py-24 bg-[#FAFAF8] border-b border-[#E8E4DF]">
       <Container>
         
         {/* Eyebrow */}
@@ -35,20 +34,20 @@ export default function DigitalSystemSection({ onBookClick }) {
           06 — DIGITAL SYSTEM
         </span>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-start mb-10 sm:mb-12">
           
           <div className="lg:col-span-6 space-y-4">
-            <h2 className="font-serif-heading text-4xl sm:text-5xl font-semibold text-[#1A1A1A] tracking-tight leading-[1.12]">
+            <h2 className="font-serif-heading text-3xl sm:text-5xl font-semibold text-[#1A1A1A] tracking-tight leading-[1.12]">
               The connected platform behind simpler care.
             </h2>
           </div>
 
           <div className="lg:col-span-6 space-y-4">
-            <p className="text-[#6B6B6B] text-base font-sans leading-relaxed">
+            <p className="text-[#6B6B6B] text-sm sm:text-base font-sans leading-relaxed">
               Technology at Krsnaa is designed to serve healthcare—connecting clinicians, collection points, automated analyzers, and tele-radiologists into one quiet, reliable diagnostic network.
             </p>
 
-            <div className="p-3 bg-white border border-[#E8E4DF] rounded-md font-sans text-xs text-[#6B6B6B] flex items-center justify-between">
+            <div className="p-3 bg-white border border-[#E8E4DF] rounded-md font-sans text-xs text-[#6B6B6B] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5">
               <span>Security Compliance: 256-Bit AES</span>
               <span className="text-[#0F766E] font-medium">ISO 15189 Certified</span>
             </div>
@@ -61,14 +60,14 @@ export default function DigitalSystemSection({ onBookClick }) {
           {subsystems.map((sys, idx) => (
             <div
               key={idx}
-              className="bg-white border border-[#E8E4DF] p-6 sm:p-7 rounded-md shadow-xs space-y-3 hover:border-[#CBD5E1] transition-all"
+              className="bg-white border border-[#E8E4DF] p-5 sm:p-7 rounded-md shadow-xs space-y-3 hover:border-[#CBD5E1] transition-all"
             >
               <div className="flex items-center justify-between font-mono-meta text-xs text-[#6B6B6B]">
                 <span className="text-[#0F766E] font-semibold">[{sys.code}]</span>
                 <span>System Component</span>
               </div>
 
-              <h3 className="font-serif-heading font-bold text-xl text-[#1A1A1A]">
+              <h3 className="font-serif-heading font-bold text-lg sm:text-xl text-[#1A1A1A]">
                 {sys.title}
               </h3>
 
@@ -83,4 +82,3 @@ export default function DigitalSystemSection({ onBookClick }) {
     </section>
   );
 }
-

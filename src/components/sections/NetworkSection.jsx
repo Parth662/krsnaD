@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
-import { MapPin, Search, PhoneCall, Clock, Navigation } from 'lucide-react';
+import { Search, PhoneCall, Clock, Navigation } from 'lucide-react';
 
 export default function NetworkSection({ onCentersClick }) {
   const [selectedCity, setSelectedCity] = useState('ALL');
@@ -72,7 +72,7 @@ export default function NetworkSection({ onCentersClick }) {
   });
 
   return (
-    <section id="centres" className="py-20 sm:py-24 bg-[#FAFAF8] border-b border-[#E8E4DF]">
+    <section id="centres" className="py-14 sm:py-20 lg:py-24 bg-[#FAFAF8] border-b border-[#E8E4DF]">
       <Container>
         
         {/* Eyebrow */}
@@ -81,14 +81,14 @@ export default function NetworkSection({ onCentersClick }) {
         </span>
 
         {/* Headline & City Selector */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12 pb-8 border-b border-[#E8E4DF]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-10 sm:mb-12 pb-6 sm:pb-8 border-b border-[#E8E4DF]">
           
           <div className="lg:col-span-6 space-y-3">
-            <h2 className="font-serif-heading text-4xl sm:text-5xl font-semibold text-[#1A1A1A] tracking-tight">
+            <h2 className="font-serif-heading text-3xl sm:text-5xl font-semibold text-[#1A1A1A] tracking-tight">
               Locate a Diagnostic Centre Near You
             </h2>
 
-            <p className="text-[#6B6B6B] text-base font-sans leading-relaxed">
+            <p className="text-[#6B6B6B] text-sm sm:text-base font-sans leading-relaxed">
               Find state-of-the-art diagnostic facilities across 150+ cities with walk-in testing and 24/7 STAT emergency reporting.
             </p>
           </div>
@@ -101,18 +101,18 @@ export default function NetworkSection({ onCentersClick }) {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by area, city or pincode..."
-                className="w-full bg-white border border-[#E8E4DF] text-[#1A1A1A] placeholder-[#6B6B6B] text-sm font-sans px-4 py-2.5 pl-10 focus:outline-none focus:border-[#0F766E] rounded-md shadow-xs"
+                className="w-full bg-white border border-[#E8E4DF] text-[#1A1A1A] placeholder-[#6B6B6B] text-sm font-sans px-4 py-2.5 pl-10 focus:outline-none focus:border-[#0F766E] rounded-md shadow-xs min-h-[44px]"
               />
-              <Search className="w-4 h-4 text-[#6B6B6B] absolute left-3.5 top-3 stroke-[1.75]" />
+              <Search className="w-4 h-4 text-[#6B6B6B] absolute left-3.5 top-3.5 stroke-[1.75]" />
             </div>
 
             {/* City Tabs */}
-            <div className="flex flex-wrap gap-2 text-xs font-sans">
+            <div className="flex overflow-x-auto no-scrollbar gap-2 text-xs font-sans pb-1">
               {cities.map(city => (
                 <button
                   key={city}
                   onClick={() => setSelectedCity(city)}
-                  className={`px-3 py-1.5 rounded-md border transition-colors ${
+                  className={`px-3.5 py-2 rounded-md border transition-colors shrink-0 min-h-[40px] ${
                     selectedCity === city
                       ? 'bg-[#0F766E] text-white border-[#0F766E] font-medium'
                       : 'bg-white text-[#6B6B6B] border-[#E8E4DF] hover:bg-[#F5F3F0] hover:text-[#1A1A1A]'
@@ -131,65 +131,68 @@ export default function NetworkSection({ onCentersClick }) {
           {filteredCentres.map((centre) => (
             <div
               key={centre.id}
-              className="bg-white border border-[#E8E4DF] p-6 sm:p-7 rounded-md shadow-xs hover:border-[#CBD5E1] transition-all space-y-5"
+              className="bg-white border border-[#E8E4DF] p-5 sm:p-7 rounded-md shadow-xs hover:border-[#CBD5E1] transition-all space-y-5 flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-[#E8E4DF] font-mono-meta text-xs text-[#6B6B6B]">
-                <span className="text-[#0F766E] font-semibold">[{centre.id}]</span>
-                <span className="bg-[#F5F3F0] px-2 py-0.5 rounded-xs text-[#1A1A1A]">{centre.city}</span>
-              </div>
-
-              <div className="space-y-1.5">
-                <h3 className="font-serif-heading font-bold text-xl sm:text-2xl text-[#1A1A1A]">
-                  {centre.name}
-                </h3>
-
-                <p className="font-sans text-xs sm:text-sm text-[#6B6B6B]">
-                  {centre.address}
-                </p>
-              </div>
-
-              {/* Hours & Phone */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-sans text-xs text-[#6B6B6B]">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-[#0F766E] shrink-0 stroke-[1.75]" />
-                  <span className="truncate">{centre.hours}</span>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#E8E4DF] font-mono-meta text-xs text-[#6B6B6B]">
+                  <span className="text-[#0F766E] font-semibold">[{centre.id}]</span>
+                  <span className="bg-[#F5F3F0] px-2 py-0.5 rounded-xs text-[#1A1A1A]">{centre.city}</span>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <PhoneCall className="w-4 h-4 text-[#0F766E] shrink-0 stroke-[1.75]" />
-                  <span>{centre.phone}</span>
-                </div>
-              </div>
+                <div className="space-y-1.5">
+                  <h3 className="font-serif-heading font-bold text-lg sm:text-2xl text-[#1A1A1A]">
+                    {centre.name}
+                  </h3>
 
-              {/* Services Tags */}
-              <div className="space-y-1.5 pt-1">
-                <span className="font-sans text-[11px] font-semibold text-[#6B6B6B] uppercase tracking-wider block">
-                  Available Facilities:
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {centre.services.map((s, sIdx) => (
-                    <span
-                      key={sIdx}
-                      className="font-sans text-xs px-2.5 py-0.5 bg-[#F5F3F0] text-[#1A1A1A] rounded-xs"
-                    >
-                      {s}
-                    </span>
-                  ))}
+                  <p className="font-sans text-xs sm:text-sm text-[#6B6B6B]">
+                    {centre.address}
+                  </p>
+                </div>
+
+                {/* Hours & Phone */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-sans text-xs text-[#6B6B6B]">
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-[#0F766E] shrink-0 stroke-[1.75]" />
+                    <span className="truncate">{centre.hours}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <PhoneCall className="w-4 h-4 text-[#0F766E] shrink-0 stroke-[1.75]" />
+                    <span>{centre.phone}</span>
+                  </div>
+                </div>
+
+                {/* Services Tags */}
+                <div className="space-y-1.5 pt-1">
+                  <span className="font-sans text-[11px] font-semibold text-[#6B6B6B] uppercase tracking-wider block">
+                    Available Facilities:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {centre.services.map((s, sIdx) => (
+                      <span
+                        key={sIdx}
+                        className="font-sans text-xs px-2.5 py-0.5 bg-[#F5F3F0] text-[#1A1A1A] rounded-xs"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
               {/* Card Footer Actions */}
-              <div className="pt-3 border-t border-[#E8E4DF] flex items-center justify-between">
+              <div className="pt-4 border-t border-[#E8E4DF] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                 <Button
                   variant="secondary"
                   size="sm"
                   icon={Navigation}
                   onClick={onCentersClick}
+                  className="w-full sm:w-auto justify-center"
                 >
                   Get Directions
                 </Button>
 
-                <span className="font-sans text-xs text-[#6B6B6B]">
+                <span className="font-sans text-xs text-[#6B6B6B] text-center sm:text-right">
                   Walk-ins & Appointments Welcome
                 </span>
               </div>

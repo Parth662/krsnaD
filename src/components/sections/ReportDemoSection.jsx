@@ -34,7 +34,7 @@ export default function ReportDemoSection() {
   };
 
   return (
-    <section id="reports" className="py-20 sm:py-24 bg-[#FAFAF8] border-b border-[#E8E4DF]">
+    <section id="reports" className="py-14 sm:py-20 lg:py-24 bg-[#FAFAF8] border-b border-[#E8E4DF]">
       <Container>
         
         {/* Eyebrow */}
@@ -43,14 +43,14 @@ export default function ReportDemoSection() {
         </span>
 
         {/* Section Headline */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-8 pb-8 border-b border-[#E8E4DF]">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 sm:mb-12 gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-[#E8E4DF]">
           <div>
-            <h2 className="font-serif-heading text-4xl sm:text-5xl font-semibold text-[#1A1A1A] tracking-tight">
+            <h2 className="font-serif-heading text-3xl sm:text-5xl font-semibold text-[#1A1A1A] tracking-tight">
               Instant Access to Your Diagnostic Reports
             </h2>
           </div>
 
-          <p className="text-[#6B6B6B] text-base font-sans max-w-md">
+          <p className="text-[#6B6B6B] text-sm sm:text-base font-sans max-w-md">
             Enter your unique Report ID or registered mobile number to view digitally signed NABL reports online 24/7.
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function ReportDemoSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column — Report Search Form (~4 cols) */}
-          <div className="lg:col-span-4 bg-white border border-[#E8E4DF] p-6 sm:p-7 rounded-md shadow-xs space-y-5">
+          <div className="lg:col-span-4 bg-white border border-[#E8E4DF] p-5 sm:p-7 rounded-md shadow-xs space-y-5 w-full">
             <div className="space-y-1">
               <span className="font-sans text-xs font-semibold text-[#0F766E] uppercase tracking-wider block">
                 Patient Report Portal
@@ -80,9 +80,9 @@ export default function ReportDemoSection() {
                     value={reportIdInput}
                     onChange={(e) => setReportIdInput(e.target.value)}
                     placeholder="e.g. KD-84920-X"
-                    className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-3.5 py-2.5 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+                    className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-3.5 py-2.5 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
                   />
-                  <Search className="w-4 h-4 text-[#6B6B6B] absolute right-3 top-3 stroke-[1.75]" />
+                  <Search className="w-4 h-4 text-[#6B6B6B] absolute right-3 top-3.5 stroke-[1.75]" />
                 </div>
               </div>
 
@@ -94,7 +94,7 @@ export default function ReportDemoSection() {
                   type="text"
                   defaultValue="+91 98765 43210"
                   readOnly
-                  className="w-full bg-[#F5F3F0] border border-[#E8E4DF] text-sm font-sans px-3.5 py-2.5 text-[#6B6B6B] cursor-not-allowed rounded-md"
+                  className="w-full bg-[#F5F3F0] border border-[#E8E4DF] text-sm font-sans px-3.5 py-2.5 text-[#6B6B6B] cursor-not-allowed rounded-md min-h-[44px]"
                 />
               </div>
 
@@ -120,12 +120,12 @@ export default function ReportDemoSection() {
           </div>
 
           {/* Right Column — Realistic Clean White Report Interface (~8 cols) */}
-          <div className="lg:col-span-8 bg-white border border-[#E8E4DF] rounded-md shadow-xs overflow-hidden">
+          <div className="lg:col-span-8 bg-white border border-[#E8E4DF] rounded-md shadow-xs overflow-hidden w-full max-w-full">
             
             {/* Header Bar */}
-            <div className="bg-[#F5F3F0] p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#E8E4DF]">
+            <div className="bg-[#F5F3F0] p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#E8E4DF]">
               <div className="space-y-1">
-                <div className="flex items-center gap-2 font-mono-meta text-xs">
+                <div className="flex items-center gap-2 font-mono-meta text-xs flex-wrap">
                   <span className="bg-[#0F766E] text-white px-2 py-0.5 rounded-xs font-medium">
                     VERIFIED REPORT
                   </span>
@@ -134,17 +134,18 @@ export default function ReportDemoSection() {
                     {sampleReport.status}
                   </span>
                 </div>
-                <h3 className="font-serif-heading font-bold text-xl text-[#1A1A1A]">
+                <h3 className="font-serif-heading font-bold text-lg sm:text-xl text-[#1A1A1A]">
                   {sampleReport.testName}
                 </h3>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="w-full sm:w-auto">
                 <Button
                   variant="primary"
                   size="sm"
                   icon={Download}
                   onClick={handleDownload}
+                  className="w-full sm:w-auto justify-center"
                 >
                   {downloadSuccess ? 'PDF Downloaded' : 'Download PDF'}
                 </Button>
@@ -152,28 +153,28 @@ export default function ReportDemoSection() {
             </div>
 
             {/* Patient Metadata Bar */}
-            <div className="p-5 bg-white border-b border-[#E8E4DF] grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-sans text-[#6B6B6B]">
+            <div className="p-4 sm:p-5 bg-white border-b border-[#E8E4DF] grid grid-cols-2 sm:grid-cols-4 gap-3 font-sans text-xs text-[#6B6B6B]">
               <div>
                 <span className="text-[#6B6B6B] block text-[10px] uppercase font-semibold">Report ID</span>
-                <span className="font-mono-meta font-bold text-[#1A1A1A]">{sampleReport.id}</span>
+                <span className="font-mono-meta font-bold text-[#1A1A1A] truncate block">{sampleReport.id}</span>
               </div>
               <div>
                 <span className="text-[#6B6B6B] block text-[10px] uppercase font-semibold">Patient Name</span>
-                <span className="font-medium text-[#1A1A1A]">{sampleReport.patientName}</span>
+                <span className="font-medium text-[#1A1A1A] truncate block">{sampleReport.patientName}</span>
               </div>
               <div>
                 <span className="text-[#6B6B6B] block text-[10px] uppercase font-semibold">Collection Date</span>
-                <span className="text-[#1A1A1A]">{sampleReport.collectionDate}</span>
+                <span className="text-[#1A1A1A] truncate block">{sampleReport.collectionDate}</span>
               </div>
               <div>
                 <span className="text-[#6B6B6B] block text-[10px] uppercase font-semibold">Accredited Lab</span>
-                <span className="text-[#1A1A1A]">{sampleReport.labLocation}</span>
+                <span className="text-[#1A1A1A] truncate block">{sampleReport.labLocation}</span>
               </div>
             </div>
 
             {/* Parameters Table */}
-            <div className="p-6 overflow-x-auto">
-              <table className="w-full text-left border-collapse text-xs sm:text-sm">
+            <div className="p-4 sm:p-6 overflow-x-auto no-scrollbar">
+              <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[500px]">
                 <thead>
                   <tr className="border-b border-[#E8E4DF] font-sans text-[#6B6B6B] text-xs uppercase">
                     <th className="pb-3 font-semibold">Test Parameter</th>
@@ -215,5 +216,3 @@ export default function ReportDemoSection() {
     </section>
   );
 }
-
-

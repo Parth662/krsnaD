@@ -56,8 +56,8 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
 
   if (submitted) {
     return (
-      <div className="bg-white border border-[#E8E4DF] p-6 sm:p-8 rounded-md shadow-xs space-y-6 text-left">
-        <div className="flex items-center gap-3 font-mono-meta text-xs text-[#0F766E] uppercase tracking-wider bg-[#F0FDFA] p-3 border border-[#CCFBF1] rounded-xs">
+      <div className="bg-white border border-[#E8E4DF] p-5 sm:p-8 rounded-md shadow-xs space-y-6 text-left w-full">
+        <div className="flex items-center gap-3 font-mono-meta text-xs text-[#0F766E] uppercase tracking-wider bg-[#F0FDFA] p-3.5 border border-[#CCFBF1] rounded-xs">
           <CheckCircle2 className="w-5 h-5 text-[#0F766E] shrink-0 stroke-[1.75]" />
           <div>
             <span className="font-bold">BOOKING CONFIRMED</span> — REFERENCE #{bookingRef}
@@ -65,33 +65,33 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
         </div>
 
         <div className="space-y-2">
-          <h3 className="font-serif-heading font-semibold text-2xl text-[#1A1A1A]">
+          <h3 className="font-serif-heading font-semibold text-xl sm:text-2xl text-[#1A1A1A]">
             Appointment Scheduled Successfully
           </h3>
-          <p className="text-[#6B6B6B] text-sm font-sans leading-relaxed">
+          <p className="text-[#6B6B6B] text-xs sm:text-sm font-sans leading-relaxed">
             Thank you, <span className="font-medium text-[#1A1A1A]">{formData.patientName}</span>. Your diagnostic request has been logged in our care telemetry system. A dedicated phlebotomist/centre coordinator will reach out shortly.
           </p>
         </div>
 
-        <div className="p-4 bg-[#F5F3F0] border border-[#E8E4DF] rounded-xs space-y-2 text-xs font-sans text-[#1A1A1A]">
-          <div className="grid grid-cols-2 gap-2 pb-2 border-b border-[#E8E4DF]">
+        <div className="p-4 bg-[#F5F3F0] border border-[#E8E4DF] rounded-xs space-y-3 text-xs font-sans text-[#1A1A1A]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-[#E8E4DF]">
             <div>
               <span className="text-[#6B6B6B] block font-mono-meta uppercase text-[10px]">Test Requested</span>
-              <span className="font-semibold">{formData.testSelected}</span>
+              <span className="font-semibold block">{formData.testSelected}</span>
             </div>
             <div>
               <span className="text-[#6B6B6B] block font-mono-meta uppercase text-[10px]">Service Mode</span>
-              <span className="font-semibold">{formData.serviceType === 'home' ? 'Home Sample Collection' : 'Centre Visit'}</span>
+              <span className="font-semibold block">{formData.serviceType === 'home' ? 'Home Sample Collection' : 'Centre Visit'}</span>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2 pt-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             <div>
               <span className="text-[#6B6B6B] block font-mono-meta uppercase text-[10px]">Scheduled Date & Slot</span>
-              <span>{formData.preferredDate} ({formData.preferredTime})</span>
+              <span className="block">{formData.preferredDate} ({formData.preferredTime})</span>
             </div>
             <div>
               <span className="text-[#6B6B6B] block font-mono-meta uppercase text-[10px]">Contact Mobile</span>
-              <span>{formData.phone}</span>
+              <span className="block">{formData.phone}</span>
             </div>
           </div>
         </div>
@@ -104,9 +104,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
           variant="secondary"
           size="md"
           className="w-full justify-center"
-          onClick={() => {
-            setSubmitted(false);
-          }}
+          onClick={() => setSubmitted(false)}
         >
           Book Another Appointment →
         </Button>
@@ -115,18 +113,18 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-[#E8E4DF] p-6 sm:p-8 rounded-md shadow-xs space-y-6">
+    <form onSubmit={handleSubmit} className="bg-white border border-[#E8E4DF] p-5 sm:p-8 rounded-md shadow-xs space-y-6 w-full max-w-full">
       
       {/* Service Type Selection */}
       <div className="space-y-2">
         <label className="font-sans text-xs font-semibold text-[#1A1A1A] uppercase tracking-wider block">
           01 — CHOOSE SERVICE MODE
         </label>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             type="button"
             onClick={() => setFormData((p) => ({ ...p, serviceType: 'home' }))}
-            className={`p-4 border text-left transition-all rounded-md flex items-start gap-3 ${
+            className={`p-3.5 sm:p-4 border text-left transition-all rounded-md flex items-start gap-3 min-h-[44px] cursor-pointer ${
               formData.serviceType === 'home'
                 ? 'border-[#0F766E] bg-[#F0FDFA] text-[#0F766E]'
                 : 'border-[#E8E4DF] bg-white text-[#6B6B6B] hover:bg-[#F5F3F0]'
@@ -146,7 +144,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
           <button
             type="button"
             onClick={() => setFormData((p) => ({ ...p, serviceType: 'centre' }))}
-            className={`p-4 border text-left transition-all rounded-md flex items-start gap-3 ${
+            className={`p-3.5 sm:p-4 border text-left transition-all rounded-md flex items-start gap-3 min-h-[44px] cursor-pointer ${
               formData.serviceType === 'centre'
                 ? 'border-[#0F766E] bg-[#F0FDFA] text-[#0F766E]'
                 : 'border-[#E8E4DF] bg-white text-[#6B6B6B] hover:bg-[#F5F3F0]'
@@ -174,7 +172,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
           name="testSelected"
           value={formData.testSelected}
           onChange={handleChange}
-          className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-3 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+          className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-3 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
         >
           {testOptions.map((t, idx) => (
             <option key={idx} value={t}>
@@ -203,9 +201,9 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 value={formData.patientName}
                 onChange={handleChange}
                 placeholder="e.g. Vikram Sharma"
-                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
               />
-              <User className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3 stroke-[1.75]" />
+              <User className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3.5 stroke-[1.75]" />
             </div>
           </div>
 
@@ -222,9 +220,9 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="10-digit Mobile Number"
-                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
               />
-              <Phone className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3 stroke-[1.75]" />
+              <Phone className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3.5 stroke-[1.75]" />
             </div>
           </div>
 
@@ -239,13 +237,13 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="vikram@example.com"
-                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
               />
-              <Mail className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3 stroke-[1.75]" />
+              <Mail className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3.5 stroke-[1.75]" />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-sans font-medium text-[#6B6B6B] block mb-1">AGE</label>
               <input
@@ -257,7 +255,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 value={formData.age}
                 onChange={handleChange}
                 placeholder="Yrs"
-                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-3 py-2.5 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-3 py-2.5 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
               />
             </div>
             <div>
@@ -266,7 +264,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
-                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-3 py-2.5 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-3 py-2.5 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -295,9 +293,9 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 required
                 value={formData.preferredDate}
                 onChange={handleChange}
-                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
               />
-              <Calendar className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3 stroke-[1.75]" />
+              <Calendar className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3.5 stroke-[1.75]" />
             </div>
           </div>
 
@@ -310,7 +308,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 name="preferredTime"
                 value={formData.preferredTime}
                 onChange={handleChange}
-                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
               >
                 <option>06:30 AM - 08:00 AM (Early Fasting)</option>
                 <option>08:00 AM - 10:00 AM (Morning Peak)</option>
@@ -318,7 +316,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 <option>02:00 PM - 05:00 PM (Afternoon)</option>
                 <option>05:00 PM - 08:00 PM (Evening)</option>
               </select>
-              <Clock className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3 stroke-[1.75]" />
+              <Clock className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3.5 stroke-[1.75]" />
             </div>
           </div>
         </div>
@@ -339,7 +337,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full sm:w-1/2">
               <label className="text-xs font-sans font-medium text-[#6B6B6B] block mb-1">
                 AREA PINCODE *
               </label>
@@ -351,7 +349,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 value={formData.pincode}
                 onChange={handleChange}
                 placeholder="e.g. 411004"
-                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
               />
             </div>
           </div>
@@ -365,7 +363,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                 name="centre"
                 value={formData.centre}
                 onChange={handleChange}
-                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md"
+                className="w-full bg-[#FAFAF8] border border-[#E8E4DF] text-sm font-sans px-4 py-2.5 pl-10 text-[#1A1A1A] focus:outline-none focus:border-[#0F766E] rounded-md min-h-[44px]"
               >
                 {centresList.map((c, idx) => (
                   <option key={idx} value={c}>
@@ -373,7 +371,7 @@ export default function BookingForm({ defaultTest = '', onSubmitted }) {
                   </option>
                 ))}
               </select>
-              <MapPin className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3 stroke-[1.75]" />
+              <MapPin className="w-4 h-4 text-[#6B6B6B] absolute left-3 top-3.5 stroke-[1.75]" />
             </div>
           </div>
         )}

@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Source Sans 3', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-healthcare-bg: #FAFAF8;
+  --color-healthcare-surface: #F5F3F0;
+  --color-healthcare-card: #FFFFFF;
+  --color-healthcare-text: #1A1A1A;
+  --color-healthcare-muted: #6B6B6B;
+  --color-healthcare-border: #E8E4DF;
+  --color-healthcare-accent: #0F766E;
+  --color-healthcare-accent-hover: #0D9488;
+  --color-healthcare-accent-light: #F0FDFA;
+}
+
+@layer base {
+  body {
+    font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    background-color: #FAFAF8;
+    color: #1A1A1A;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #1A1A1A;
+    font-weight: 600;
+  }
+
+  ::selection {
+    background-color: #0F766E;
+    color: #FFFFFF;
+  }
+}
+
+/* Custom Editorial Classes */
+.font-serif-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-sans-body {
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+}
+
+.font-mono-meta {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Subtle Hairline Dividers */
+.border-light-hairline {
+  border-color: #E8E4DF;
+}
+
+/* Clean Card Utility */
+.card-healthcare {
+  background-color: #FFFFFF;
+  border: 1px solid #E8E4DF;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  transition: all 200ms ease-in-out;
+}
+
+.card-healthcare:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Accessible focus states */
+*:focus-visible {
+  outline: 2px solid #0F766E !important;
+  outline-offset: 2px !important;
+}
+
+/* Fast micro transitions */
+.transition-std {
+  transition-duration: 150ms;
+}
+
+
+

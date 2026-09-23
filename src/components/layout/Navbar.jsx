@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
-import { Menu, X, FileText, CalendarCheck } from 'lucide-react';
+import { Menu, X, FileText, CalendarCheck, ArrowRight } from 'lucide-react';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -22,16 +22,16 @@ export default function Navbar() {
   const mainNavLinks = [
     { label: 'Tests & Diagnostics', path: '/tests' },
     { label: 'Home Collection', path: '/home-collection' },
-    { label: 'Centres', path: '/centres' },
-    { label: 'Patient Care', path: '/patient-care' },
-    { label: 'About', path: '/about' },
+    { label: 'Centres Network', path: '/centres' },
+    { label: 'Patient Care Hub', path: '/patient-care' },
+    { label: 'About Krsnaa', path: '/about' },
   ];
 
   const secondaryNavLinks = [
     { label: 'How It Works', path: '/how-it-works' },
     { label: 'Digital System', path: '/digital' },
     { label: 'Patient Portal & Reports', path: '/reports' },
-    { label: 'Book a Test', path: '/book' },
+    { label: 'Book a Diagnostic Test', path: '/book' },
   ];
 
   const isActive = (path) => {
@@ -112,22 +112,27 @@ export default function Navbar() {
         </div>
       </Container>
 
-      {/* Mobile Menu Drawer Overlay */}
+      {/* Editorial Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-[64px] sm:top-[80px] bottom-0 bg-[#FAFAF8] border-b border-[#E8E4DF] z-40 overflow-y-auto px-6 py-6 space-y-6 animate-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col space-y-1">
-            <span className="font-mono-meta text-[10px] uppercase tracking-wider text-[#6B6B6B] block mb-2 font-semibold">
-              01 — MAIN MENU
+        <div className="fixed inset-x-0 top-[64px] sm:top-[80px] bottom-0 bg-[#FAFAF8] border-b border-[#E8E4DF] z-40 overflow-y-auto px-6 py-8 space-y-8 animate-in slide-in-from-top-2 duration-200">
+          
+          {/* Main Navigation Section */}
+          <nav className="flex flex-col space-y-2">
+            <span className="font-mono-meta text-[10px] uppercase tracking-[0.2em] text-[#0F766E] block mb-2 font-bold">
+              01 — MAIN NAVIGATION
             </span>
+
             <Link
               to="/"
               onClick={() => setMobileMenuOpen(false)}
-              className={`text-base font-sans min-h-[44px] flex items-center border-b border-[#E8E4DF]/60 transition-colors ${
-                isActive('/') ? 'text-[#0F766E] font-semibold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
+              className={`text-xl font-serif-heading min-h-[48px] flex items-center justify-between border-b border-[#E8E4DF] transition-colors ${
+                isActive('/') ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
               }`}
             >
-              Home Page
+              <span>Home Page</span>
+              <ArrowRight className="w-4 h-4 text-[#6B6B6B]" />
             </Link>
+
             {mainNavLinks.map((link) => {
               const active = isActive(link.path);
               return (
@@ -135,17 +140,21 @@ export default function Navbar() {
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-base font-sans min-h-[44px] flex items-center border-b border-[#E8E4DF]/60 transition-colors ${
-                    active ? 'text-[#0F766E] font-semibold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
+                  className={`text-xl font-serif-heading min-h-[48px] flex items-center justify-between border-b border-[#E8E4DF] transition-colors ${
+                    active ? 'text-[#0F766E] font-bold' : 'text-[#1A1A1A] hover:text-[#0F766E]'
                   }`}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  <ArrowRight className="w-4 h-4 text-[#6B6B6B]" />
                 </Link>
               );
             })}
+          </nav>
 
-            <span className="font-mono-meta text-[10px] uppercase tracking-wider text-[#6B6B6B] block pt-4 mb-2 font-semibold">
-              02 — MORE SERVICES & PORTAL
+          {/* Secondary Services Section */}
+          <nav className="flex flex-col space-y-1">
+            <span className="font-mono-meta text-[10px] uppercase tracking-[0.2em] text-[#0F766E] block mb-2 font-bold">
+              02 — PATIENT SERVICES & DIGITAL PORTAL
             </span>
             {secondaryNavLinks.map((link) => {
               const active = isActive(link.path);
@@ -154,24 +163,26 @@ export default function Navbar() {
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-sm font-sans min-h-[44px] flex items-center border-b border-[#E8E4DF]/60 transition-colors ${
+                  className={`text-sm font-sans min-h-[44px] flex items-center justify-between border-b border-[#E8E4DF]/60 transition-colors ${
                     active ? 'text-[#0F766E] font-semibold' : 'text-[#6B6B6B] hover:text-[#1A1A1A]'
                   }`}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  <span className="text-xs text-[#0F766E]">→</span>
                 </Link>
               );
             })}
           </nav>
 
-          <div className="pt-4 space-y-3 pb-8">
+          {/* Action CTAs in Mobile Drawer */}
+          <div className="pt-2 space-y-3 pb-12">
             <Link
               to="/reports"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center text-xs font-sans font-semibold text-[#0F766E] bg-[#F0FDFA] border border-[#CCFBF1] py-3 rounded-md block min-h-[44px] flex items-center justify-center gap-2"
+              className="w-full text-center text-xs font-sans font-semibold text-[#0F766E] bg-[#F0FDFA] border border-[#CCFBF1] py-3.5 rounded-md block min-h-[48px] flex items-center justify-center gap-2"
             >
               <FileText className="w-4 h-4" />
-              <span>Patient Portal (Reports Access)</span>
+              <span>Access Patient Portal (Download Reports)</span>
             </Link>
 
             <Link
@@ -180,10 +191,15 @@ export default function Navbar() {
               className="block"
             >
               <Button variant="primary" size="lg" className="w-full justify-center">
-                BOOK A DIAGNOSTIC TEST
+                BOOK A DIAGNOSTIC TEST NOW
               </Button>
             </Link>
+
+            <div className="pt-4 text-center font-mono-meta text-[10px] text-[#6B6B6B]">
+              📞 24/7 STAT Helpline: <a href="tel:18002120000" className="text-[#0F766E] font-bold underline">1800-212-0000</a>
+            </div>
           </div>
+
         </div>
       )}
     </header>
